@@ -2,10 +2,10 @@ export type Champion = { name: string; id: string };
 
 // `id` is the Data Dragon key used in image URLs.
 const names = [
-  "Bard", "Blitzcrank", "Brand", "Janna", "Karma", "Leona", "Lulu", "Lux",
-  "Maokai", "Milio", "Morgana", "Nautilus", "Neeko", "Pantheon", "Poppy",
-  "Rakan", "Rell", "Renata Glasc", "Senna", "Seraphine", "Sona", "Soraka",
-  "Swain", "Tahm Kench", "Taric", "Vel'Koz", "Xerath", "Yuumi", "Zilean", "Zyra",
+  "Alistar", "Bard", "Blitzcrank", "Brand", "Braum", "Janna", "Karma", "Leona", "Lulu", "Lux",
+  "Maokai", "Milio", "Morgana", "Nami", "Nautilus", "Neeko", "Pantheon", "Poppy",
+  "Pyke", "Rakan", "Rell", "Renata Glasc", "Senna", "Seraphine", "Sona", "Soraka",
+  "Swain", "Tahm Kench", "Taric", "Thresh", "Vel'Koz", "Xerath", "Yuumi", "Zilean", "Zyra",
 ];
 
 const ID_OVERRIDES: Record<string, string> = {
@@ -13,6 +13,9 @@ const ID_OVERRIDES: Record<string, string> = {
   "Tahm Kench": "TahmKench",
   "Vel'Koz": "Velkoz",
 };
+
+// Champions already played before the tracker existed.
+export const ALREADY_PLAYED = ["Alistar", "Braum", "Nami", "Pyke", "Thresh"];
 
 export const CHAMPIONS: Champion[] = names.map((name) => ({
   name,

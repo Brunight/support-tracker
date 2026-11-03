@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
-import { CHAMPIONS, FALLBACK_VERSION, fetchLatestVersion, iconUrl } from "./champions";
+import { ALREADY_PLAYED, CHAMPIONS, FALLBACK_VERSION, fetchLatestVersion, iconUrl } from "./champions";
 
 const STORAGE_KEY = "support-tracker:played";
 const PICK_KEY = "support-tracker:pick";
+const SEEDED_KEY = "support-tracker:seeded-v1";
 
 function loadPlayed(): Set<string> {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return new Set(raw ? (JSON.parse(raw) as string[]) : []);
+    const played = new Set(raw ? (JSON.parse(raw) as string[]) : []);
+    // One-time: mark the champions played before the tracker as done.
+    if (!localStorage.getItem(SEEDED_KEY)) {
+      ALREADY_PLAYED.forEach((c) => played.add(c));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...played]));
+      localStorage.setItem(SEEDED_KEY, "1");
+    }
+    return played;
   } catch {
     return new Set();
   }
